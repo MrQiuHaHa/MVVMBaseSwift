@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MVVMBaseSwift_Example' do
+  pod 'MVVMBaseSwift', :path => '../'
+
+  target 'MVVMBaseSwift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
