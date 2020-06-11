@@ -9,6 +9,10 @@ import Foundation
 
 open class ModuleBaseItem {
     
+    public init() {
+        
+    }
+    
     open static func reuseCellIdentifier() -> String {
         String(describing: self)
     }
