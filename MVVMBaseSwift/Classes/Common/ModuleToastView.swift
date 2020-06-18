@@ -9,6 +9,12 @@ import Foundation
 
 public class ModuleToastView: UIView {
     
+    public enum LocationType {
+        case top
+        case middle
+        case bottom
+    }
+    
     lazy var textLabel = UILabel()
     
     init() {
@@ -25,12 +31,12 @@ public class ModuleToastView: UIView {
         print("dealloc 'YMWisdomToastView' ~ ")
     }
     
-    public static func showToastMsg(_ msg: String) {
+    public static func showToastMsg(_ msg: String, _ type: LocationType = .bottom) {
         if msg.count == 0 { return }
-        ModuleToastView().showToastMsg(msg: msg)
+        ModuleToastView().showToastMsg(msg: msg, type: type)
     }
     
-    private func showToastMsg(msg: String) {
+    private func showToastMsg(msg: String, type: LocationType) {
         
         textLabel = UILabel()
         textLabel.textColor = UIColor.white
@@ -63,7 +69,17 @@ public class ModuleToastView: UIView {
         textLabel.frame = CGRect(x: cx, y: cy, width: labW, height: tempH)
         cx = (SCREEN_WIDTH-vw)/2.0
         vh = textLabel.frame.maxY + 10
-        cy = SCREEN_HEIGHT - vh - 60 - CGFloat(BOTTOM_HEIGHT)
+        switch type {
+        case .top:
+            cy = CGFloat(TOP_HEIGHT)
+        case .middle:
+            cy = (SCREEN_HEIGHT - vh)/2.0
+        case .bottom:
+            cy = SCREEN_HEIGHT - vh - 60 - CGFloat(BOTTOM_HEIGHT)
+        default:
+            break
+        }
+        
         frame = CGRect(x: cx, y: cy, width: vw, height: vh)
         UIApplication.shared.keyWindow?.addSubview(self)
         UIApplication.shared.keyWindow?.bringSubviewToFront(self)

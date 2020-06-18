@@ -27,7 +27,11 @@ open class ModuleBaseVC: UIViewController{
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+        if #available(iOS 13, *) {
+            UIApplication.shared.statusBarStyle = .darkContent
+        } else {
+            UIApplication.shared.statusBarStyle = .default
+        }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) {
             self.setNavigationBar()
         }
@@ -37,12 +41,7 @@ open class ModuleBaseVC: UIViewController{
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if #available(iOS 13, *) {
-            UIApplication.shared.statusBarStyle = .darkContent
-        } else {
-            UIApplication.shared.statusBarStyle = .default
-        }
-        
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     deinit {
