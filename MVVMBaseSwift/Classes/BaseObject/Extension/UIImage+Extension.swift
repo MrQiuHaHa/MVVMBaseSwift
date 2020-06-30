@@ -67,15 +67,21 @@ extension UIImage
         return returnImage!
     }
     
-    /// 获取指定bundle的图片资源
+    /// 获取指定bundle的图片资源（不对其他模块使用）
     /// - Parameter name: 图片名称
-    open static func imageRecoverWith(name:String) -> UIImage? {
+    internal static func imageRecoverWith(name:String) -> UIImage? {
         
-        if let image = UIImage.init(named: "YMLocalResources.bundle/".appending(name))  {
+        moduleBaseImage(imgName: name, bundleName: "JRLocalResources")
+    }
+
+    // 请在自己的模块写分类调用
+    open static func moduleBaseImage(imgName: String, bundleName: String) -> UIImage? {
+        
+        if let image = UIImage.init(named: "\(bundleName).bundle/".appending(imgName))  {
             return image
         }
         
-        if let image = UIImage.init(named: name)  {
+        if let image = UIImage.init(named: imgName)  {
             return image
         }
         

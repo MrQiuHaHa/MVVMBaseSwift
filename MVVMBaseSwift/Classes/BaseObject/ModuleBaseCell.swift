@@ -24,11 +24,6 @@ open class ModuleBaseCell : UITableViewCell {
     /// 响应表单单元格内部事件的委托
     public weak var delegate: ModuleBaseCellDelegate?
     
-    /// 不重写则默认 高度 49
-    open class func cellHeightForFormItem(baseItem: ModuleBaseItem) -> CGFloat {
-        //后期可以扩展不同的Item，如果可以统一基础样式，根据不同的item设置不同的默认高度
-        return 49
-    }
 
     open override func awakeFromNib() {
         super.awakeFromNib()

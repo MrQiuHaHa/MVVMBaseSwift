@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MVVMBaseSwift'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'A short description of MVVMBaseSwift.'
 
 
@@ -20,7 +20,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'MVVMBaseSwift/Classes/**/*'
   s.resource_bundles = {
-    'YMLocalResources' => ['MVVMBaseSwift/Assets/*']
+    'JRLocalResources' => ['MVVMBaseSwift/Assets/*']
   }
    
 

@@ -10,6 +10,22 @@ import Foundation
 
 public extension String {
     
+    /// 四位一空格 格式
+    public func spaceInsert() -> String {
+        if self.count > 1 {
+            var newStr = ""
+            for idx in 0...self.count-1 {
+                newStr.append(self[idx])
+                if (idx+1)%4 == 0 {
+                    newStr.append(" ")
+                }
+            }
+            return newStr
+        } else {
+            return ""
+        }
+    }
+    
     /// String的高度计算
     /// - Parameters:
     ///   - width: 设定宽度前提

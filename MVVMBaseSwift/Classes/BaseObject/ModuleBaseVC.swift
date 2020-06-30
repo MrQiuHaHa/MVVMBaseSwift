@@ -14,7 +14,18 @@ open class ModuleBaseVC: UIViewController{
     public var parm: Dictionary<String,Any>?
     
     /// 是否展示无数据/异常页面
-    public var showNoMessageStyle = false
+    public var showNoMessageStyle: Bool? {
+        willSet {
+            if let val = newValue  {
+                errorView.isHidden = !val
+            }
+        }
+    }
+    
+    /// 无数据/异常显示图片
+    public var errorImage: UIImage?
+    
+    public var errorTips: String?
     
     
     open override func viewDidLoad() {
@@ -48,7 +59,27 @@ open class ModuleBaseVC: UIViewController{
         print(" *** dealloc *** : \(self)")
     }
     
-    
+    lazy var errorView: UIView = {
+        
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 155, width: SCREEN_WIDTH, height: 185)
+        view.backgroundColor = UIColor.clear
+        let image = errorImage == nil ? UIImage.imageRecoverWith(name: "BaseErrorTip_Image") : errorImage
+        let imageV = UIImageView(frame: CGRect(x: (SCREEN_WIDTH-135)/2.0, y: 0, width: 135, height: 135))
+        imageV.image = image
+        view.addSubview(imageV)
+        
+        let errorLab = UILabel(frame: CGRect(x: 15, y: imageV.frame.maxY, width: SCREEN_WIDTH-30, height: 50))
+        errorLab.text = errorTips == nil ? "暂无数据" : errorTips!
+        errorLab.textAlignment = .center
+        errorLab.textColor = UIColor.color(hex: 0x666666)
+        errorLab.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(errorLab)
+        
+        view.isHidden = true
+        
+        return view
+    }()
     
 }
 

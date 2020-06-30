@@ -10,8 +10,9 @@ import Foundation
 
 public extension Bundle {
     
-    open static func bundleLocal() -> Bundle? {
-        let Url = Bundle.main.url(forResource: "YMLocalResources", withExtension: "bundle")
+    // 请在自己的模块写分类调用
+    open static func moduleBaseBundleLocal(resource: String) -> Bundle? {
+        let Url = Bundle.main.url(forResource: resource, withExtension: "bundle")
         if Url == nil {
             return nil
         } else {
